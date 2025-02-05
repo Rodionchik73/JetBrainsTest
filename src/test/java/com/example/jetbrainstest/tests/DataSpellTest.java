@@ -18,6 +18,7 @@ public class DataSpellTest extends BaseTest{
         dataSpellPage = new DataSpellPage(getDriver());
     }
 
+
     @Test
     @DisplayName("Проверка, что кнопка Pricing активна")
     public void buttonPricing() {
