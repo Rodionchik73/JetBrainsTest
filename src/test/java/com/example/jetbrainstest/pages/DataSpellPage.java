@@ -4,11 +4,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 // page_url = https://www.jetbrains.com/dataspell/
 public class DataSpellPage {
+    private final Logger LOG = LoggerFactory.getLogger(DataSpellPage.class);
     WebDriver driver;
     @FindBy(css = "a[href='/dataspell/buy/']")
     private WebElement pricingButton;
@@ -26,35 +29,35 @@ public class DataSpellPage {
     private WebElement whatsNewButton;
 
     public Boolean checkPricingButtonClickable() {
-        System.out.println("Проверка активности кнопки Pricing");
+        LOG.info("Проверка активности кнопки Pricing");
         return pricingButton.isEnabled();
     }
 
     public boolean clickSearchButton() {
-        System.out.println("Клик на Developer Tools");
+        LOG.info("Клик на Developer Tools");
         return searchButton.isEnabled();
     }
 
     public void sendWordInSearchButton(String text) {
         searchButton.click();
         searchInput.sendKeys(text);
-        System.out.println("Ввод слова в строке поиска");
+        LOG.info("Ввод слова в строке поиска");
     }
 
     public Boolean clickFullSearchButton() {
-        System.out.println("Клик на кнопку Advanced search Ctrl+K");
+        LOG.info("Клик на кнопку Advanced search Ctrl+K");
         return fullSearchButton.isDisplayed();
     }
 
     public boolean clickDeveloperTools() {
-        System.out.println("Клик на Developer Tools");
+        LOG.info("Клик на Developer Tools");
         developerTools.isEnabled();
         developerTools.click();
         return true;
     }
 
     public boolean menuIsDisplayed(String text) {
-        System.out.println(text + " отображается");
+        LOG.info("{} отображается", text);
         for (WebElement idesMenu : elementsMenu) {
             if (idesMenu.getText().contains(text))
                 return true;
@@ -63,7 +66,7 @@ public class DataSpellPage {
     }
 
     public String whatsNewUrl() {
-        System.out.println("Проверка URL страницы после клика на WhatsNew");
+        LOG.info("Проверка URL страницы после клика на WhatsNew");
         whatsNewButton.click();
         return driver.getCurrentUrl();
     }
