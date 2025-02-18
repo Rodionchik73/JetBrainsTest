@@ -13,18 +13,25 @@ import java.util.List;
 public class DataSpellPage {
     private final Logger LOG = LoggerFactory.getLogger(DataSpellPage.class);
     WebDriver driver;
+
     @FindBy(css = "a[href='/dataspell/buy/']")
     private WebElement pricingButton;
+
     @FindBy(css = "button[aria-label=\'Open search\']")
     private WebElement searchButton;
+
     @FindBy(css = "button[data-test='full-search-button']")
     private WebElement fullSearchButton;
+
     @FindBy(css = "[placeholder='Ctrl+K for advanced search']")
     private WebElement searchInput;
+
     @FindBy(css = "[data-test-marker='Developer Tools']")
     private WebElement developerTools;
+
     @FindBy(xpath = "//*[contains(@data-test, 'main-submenu-column-title')][text()]")
     private List<WebElement> elementsMenu;
+
     @FindBy(css = "[href='/dataspell/whatsnew/']")
     private WebElement whatsNewButton;
 
