@@ -1,6 +1,7 @@
 package com.example.jetbrainstest.tests;
 
 import com.example.jetbrainstest.pages.DataSpellPage;
+import io.qameta.allure.Step;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,6 +14,7 @@ public class DataSpellTest extends BaseTest {
 
     @BeforeEach
     @Override
+    @Step("Переход в раздел Data Spell")
     public void setUp() {
         super.setUp();
         getDriver().get("https://www.jetbrains.com/dataspell/");
