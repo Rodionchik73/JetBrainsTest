@@ -45,30 +45,30 @@ public class DataSpellPage {
     }
 
     public boolean clickSearchButton() {
-        LOG.info("Клик на Developer Tools");
+        LOG.infoWithScreenshot("Клик на Developer Tools");
         return searchButton.isEnabled();
     }
 
     public void sendWordInSearchButton(String text) {
         searchButton.click();
         searchInput.sendKeys(text);
-        LOG.info("Ввод слова в строке поиска");
+        LOG.infoWithScreenshot("Ввод слова в строке поиска");
     }
 
     public Boolean clickFullSearchButton() {
-        LOG.info("Клик на кнопку Advanced search Ctrl+K");
+        LOG.infoWithScreenshot("Клик на кнопку Advanced search Ctrl+K");
         return fullSearchButton.isDisplayed();
     }
 
     public boolean clickDeveloperTools() {
-        LOG.info("Клик на Developer Tools");
+        LOG.infoWithScreenshot("Клик на Developer Tools");
         developerTools.isEnabled();
         developerTools.click();
         return true;
     }
 
     public boolean menuIsDisplayed(String text) {
-        LOG.info(text + "отображается");
+        LOG.infoWithScreenshot(text + "отображается");
         for (WebElement idesMenu : elementsMenu) {
             if (idesMenu.getText().contains(text))
                 return true;
@@ -77,7 +77,7 @@ public class DataSpellPage {
     }
 
     public String whatsNewUrl() {
-        LOG.info("Проверка URL страницы после клика на WhatsNew");
+        LOG.infoWithScreenshot("Проверка URL страницы после клика на WhatsNew");
         whatsNewButton.click();
         return driver.getCurrentUrl();
     }
