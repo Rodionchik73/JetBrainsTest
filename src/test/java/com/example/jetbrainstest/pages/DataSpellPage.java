@@ -1,5 +1,6 @@
 package com.example.jetbrainstest.pages;
 
+import com.example.jetbrainstest.AllureLogger;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,7 +13,8 @@ import java.util.List;
 
 // page_url = https://www.jetbrains.com/dataspell/
 public class DataSpellPage {
-    private final Logger LOG = LoggerFactory.getLogger(DataSpellPage.class);
+    private final AllureLogger LOG = new AllureLogger(LoggerFactory.getLogger(DataSpellPage.class));
+    //private final Logger LOG = LoggerFactory.getLogger(DataSpellPage.class);
     WebDriver driver;
 
     @FindBy(css = "a[href='/dataspell/buy/']")
@@ -42,26 +44,22 @@ public class DataSpellPage {
         return pricingButton.isEnabled();
     }
 
-    @Step("Клик на Developer Tools")
     public boolean clickSearchButton() {
         LOG.info("Клик на Developer Tools");
         return searchButton.isEnabled();
     }
 
-    @Step("Ввод слова в строке поиска")
     public void sendWordInSearchButton(String text) {
         searchButton.click();
         searchInput.sendKeys(text);
         LOG.info("Ввод слова в строке поиска");
     }
 
-    @Step("Клик на кнопку Advanced search Ctrl+K")
     public Boolean clickFullSearchButton() {
         LOG.info("Клик на кнопку Advanced search Ctrl+K");
         return fullSearchButton.isDisplayed();
     }
 
-    @Step("Клик на Developer Tools")
     public boolean clickDeveloperTools() {
         LOG.info("Клик на Developer Tools");
         developerTools.isEnabled();
@@ -69,9 +67,8 @@ public class DataSpellPage {
         return true;
     }
 
-    @Step("Отображение элементов в меню Developer tools")
     public boolean menuIsDisplayed(String text) {
-        LOG.info("{} отображается", text);
+        LOG.info(text + "отображается");
         for (WebElement idesMenu : elementsMenu) {
             if (idesMenu.getText().contains(text))
                 return true;
@@ -79,7 +76,6 @@ public class DataSpellPage {
         return false;
     }
 
-    @Step("Проверка URL страницы после клика на WhatsNew")
     public String whatsNewUrl() {
         LOG.info("Проверка URL страницы после клика на WhatsNew");
         whatsNewButton.click();

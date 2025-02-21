@@ -14,7 +14,6 @@ public class DataSpellTest extends BaseTest {
 
     @BeforeEach
     @Override
-    @Step("Переход в раздел Data Spell")
     public void setUp() {
         super.setUp();
         getDriver().get("https://www.jetbrains.com/dataspell/");
