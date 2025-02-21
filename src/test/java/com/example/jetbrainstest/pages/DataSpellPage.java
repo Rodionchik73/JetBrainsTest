@@ -6,7 +6,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
@@ -14,7 +13,6 @@ import java.util.List;
 // page_url = https://www.jetbrains.com/dataspell/
 public class DataSpellPage {
     private final AllureLogger LOG = new AllureLogger(LoggerFactory.getLogger(DataSpellPage.class));
-    //private final Logger LOG = LoggerFactory.getLogger(DataSpellPage.class);
     WebDriver driver;
 
     @FindBy(css = "a[href='/dataspell/buy/']")
@@ -45,30 +43,30 @@ public class DataSpellPage {
     }
 
     public boolean clickSearchButton() {
-        LOG.infoWithScreenshot("Клик на Developer Tools");
+        LOG.info("Клик на Developer Tools");
         return searchButton.isEnabled();
     }
 
     public void sendWordInSearchButton(String text) {
         searchButton.click();
         searchInput.sendKeys(text);
-        LOG.infoWithScreenshot("Ввод слова в строке поиска");
+        LOG.info("Ввод слова в строке поиска");
     }
 
     public Boolean clickFullSearchButton() {
-        LOG.infoWithScreenshot("Клик на кнопку Advanced search Ctrl+K");
+        LOG.info("Клик на кнопку Advanced search Ctrl+K");
         return fullSearchButton.isDisplayed();
     }
 
     public boolean clickDeveloperTools() {
-        LOG.infoWithScreenshot("Клик на Developer Tools");
+        LOG.info("Клик на Developer Tools");
         developerTools.isEnabled();
         developerTools.click();
         return true;
     }
 
     public boolean menuIsDisplayed(String text) {
-        LOG.infoWithScreenshot(text + "отображается");
+        LOG.info(text + "отображается");
         for (WebElement idesMenu : elementsMenu) {
             if (idesMenu.getText().contains(text))
                 return true;
@@ -77,7 +75,7 @@ public class DataSpellPage {
     }
 
     public String whatsNewUrl() {
-        LOG.infoWithScreenshot("Проверка URL страницы после клика на WhatsNew");
+        LOG.info("Проверка URL страницы после клика на WhatsNew");
         whatsNewButton.click();
         return driver.getCurrentUrl();
     }

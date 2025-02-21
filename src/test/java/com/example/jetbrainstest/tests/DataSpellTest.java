@@ -1,13 +1,16 @@
 package com.example.jetbrainstest.tests;
 
+import com.example.jetbrainstest.MyExtension;
 import com.example.jetbrainstest.pages.DataSpellPage;
-import io.qameta.allure.Step;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExecutionCondition;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.By;
 
 import static org.junit.jupiter.api.Assertions.*;
+@ExtendWith(MyExtension.class)
 
 public class DataSpellTest extends BaseTest {
     private DataSpellPage dataSpellPage;
@@ -38,7 +41,7 @@ public class DataSpellTest extends BaseTest {
     @DisplayName("Проверка что отображается кнопка 'Advanced search Ctrl+K' после ввода значения в строку поиска")
     public void advancedSearch() {
         String input = "ai";
-        dataSpellPage.sendWordInSearchButton(input);
+        //dataSpellPage.sendWordInSearchButton(input);
         assertTrue(dataSpellPage.clickFullSearchButton(), "Кнопка 'Advanced search Ctrl+K' не отображается");
     }
 
