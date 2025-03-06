@@ -1,7 +1,6 @@
 package com.example.jetbrainstest.pages;
 
 import com.example.jetbrainstest.AllureLogger;
-import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -33,10 +32,33 @@ public class DataSpellPage {
     @FindBy(xpath = "//*[contains(@data-test, 'main-submenu-column-title')][text()]")
     private List<WebElement> elementsMenu;
 
+    @FindBy(xpath = "//*[contains(@data-test, 'main-submenu-sub-column-title')][text()]")
+    private List<WebElement> elementsSubMenu;
+
+    @FindBy(xpath = "//*[contains(@class, '_rs-text-2_19db458_1 _rs-text_hardness_auto_19db458_1 _mainSubmenuItem__title_1ktlvrb_1')][text()]")
+    private List<WebElement> elementsSubMenuItemLink;
+
     @FindBy(css = "[href='/dataspell/whatsnew/']")
     private WebElement whatsNewButton;
 
-    @Step("Проверка активности кнопки Pricing")
+    @FindBy(css = "[data-test='main-menu-item']> [aria-label='Store: Open submenu']")
+    private WebElement storeButton;
+
+    @FindBy(css = "[href='/all/'][aria-label='Learn more']")
+    private WebElement storeButtonLearnMore;
+
+    @FindBy(xpath = "//*[text()='Submit']")
+    private WebElement submitButton;
+
+    @FindBy(css = "[data-test='language-picker']")
+    private WebElement languagePicker;
+
+    @FindBy(xpath = "//*[contains(@class, 'wt-list-item__content')][text() = 'Deutsch']")
+    private WebElement deutschButton;
+
+    @FindBy(xpath = "//*[text() = 'Verwandeln Sie Daten mühelos in Erkenntnisse']")
+    private WebElement mainWord;
+
     public Boolean checkPricingButtonClickable() {
         LOG.info("Проверка активности кнопки Pricing");
         return pricingButton.isEnabled();
@@ -66,8 +88,26 @@ public class DataSpellPage {
     }
 
     public boolean menuIsDisplayed(String text) {
-        LOG.info(text + "отображается");
+        LOG.info(text + " отображается");
         for (WebElement idesMenu : elementsMenu) {
+            if (idesMenu.getText().contains(text))
+                return true;
+        }
+        return false;
+    }
+
+    public boolean subItemLinkIsDisplayed(String text) {
+        LOG.info(text + " отображается");
+        for (WebElement idesMenu : elementsSubMenuItemLink) {
+            if (idesMenu.getText().contains(text))
+                return true;
+        }
+        return false;
+    }
+
+    public boolean subMenuIsDisplayed(String text) {
+        LOG.info(text + " отображается");
+        for (WebElement idesMenu : elementsSubMenu) {
             if (idesMenu.getText().contains(text))
                 return true;
         }
@@ -80,8 +120,39 @@ public class DataSpellPage {
         return driver.getCurrentUrl();
     }
 
+    public Boolean checkStoreButtonClickable() {
+        LOG.info("Проверка активности кнопки Store");
+        return storeButton.isEnabled();
+    }
+
+    public String urlStoreButtonLearnMore() {
+        LOG.info("Проверка URL страницы после клика на All Products Pack в Store");
+        storeButton.click();
+        storeButtonLearnMore.click();
+        return driver.getCurrentUrl();
+    }
+
+    public Boolean clickStoreButton() {
+        LOG.info("Клик на Store");
+        storeButton.click();
+        return true;
+    }
+
+    public String submitButtonName() {
+        LOG.info("Получение названия кнопки Submit");
+        return submitButton.getText();
+    }
+
+    public String checkDeutschButton() {
+        LOG.info("Проверка активности кнопки Deutsch");
+        languagePicker.click();
+        deutschButton.click();
+        return mainWord.getText();
+    }
+
     public DataSpellPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
+
 }
