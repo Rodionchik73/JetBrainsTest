@@ -8,6 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
+
 import static com.example.jetbrainstest.MyWait.myWait;
 
 // page_url = https://www.jetbrains.com/dataspell/
