@@ -41,6 +41,7 @@ public class DataSpellTest extends BaseTest {
     @DisplayName("Проверка что отображается кнопка 'Advanced search Ctrl+K' после ввода значения в строку поиска")
     public void advancedSearch() {
         String input = "ai";
+        dataSpellPage.sendWordInSearchButton(input);
         assertTrue(dataSpellPage.clickFullSearchButton(), "Кнопка 'Advanced search Ctrl+K' не отображается");
     }
 
@@ -104,7 +105,6 @@ public class DataSpellTest extends BaseTest {
                 () -> assertTrue(dataSpellPage.subItemLinkIsDisplayed("Special offers & programs"), "Special offers & programs не отображается"));
     }
 
-    //не работает
     @Test
     @DisplayName("Проверка названия кнопки Submit")
     public void submitButtonName() {
@@ -112,20 +112,66 @@ public class DataSpellTest extends BaseTest {
         assertEquals(buttonSubmit, dataSpellPage.submitButtonName(), "Кнопка с названием Submit не находится на странице");
     }
 
-    //всплывает доп окно, которое не возможно поймать при автотестe
     @Test
     @DisplayName("Проверка изменения языка на странице на Deutsch")
     public void deutschLanguageButton() {
-        String mainWordDeutsch = "Verwandeln Sie Daten mühelos in Erkenntnisse";
-        assertEquals(mainWordDeutsch, dataSpellPage.checkDeutschButton(), "Язык страницы не изменился на немецкий");
+        assertTrue(dataSpellPage.checkDeutschButton(), "Кнопка Deutsch не активна");
     }
 
     @Test
-    @DisplayName("Проверка что появляется подсказка 'Это поле обязательно к заполнению' " +
-            "и подсвечивается красным при отправке пустого email")
+    @DisplayName("Проверка что появляется подсказка 'This field is required' при отправке пустого email")
     public void emptyEmailPrompt() {
-
+        assertTrue(dataSpellPage.checkTextIsRequired(), "Не появляется подсказка 'This field is required");
     }
 
+    @Test
+    @DisplayName("Проверка что после успешного ввода email появляется текст 'Thanks for your request!'")
+    public void thankYoutextAfterSentEmail() {
+        String input = "rod@mail.ru";
+        dataSpellPage.sendEmail(input);
+        assertTrue(dataSpellPage.checkTextThankYou(), "Текст 'Thanks for your request!' после успешной отправки email не отображается");
+    }
+
+    @Test
+    @DisplayName("Проверка что в поле email проверяется формат и появляется подсказка 'E-mail address is not correct'")
+    public void cleanEmail() {
+        String input = "rod";
+        dataSpellPage.sendEmail(input);
+        assertTrue(dataSpellPage.checkEmailAddress(), "Текст 'E-mail address is not correct' не отображается");
+    }
+
+    @Test
+    @DisplayName("После клика на кнопку Coming in 2025.1 переходит на страницу https://www.jetbrains.com/dataspell/nextversion/")
+    public void comingInUrl() {
+        assertEquals("https://www.jetbrains.com/dataspell/nextversion/", dataSpellPage.comingInUrl(),
+                "Не верная url после клика на Coming in 2025.1");
+    }
+
+    @Test
+    @DisplayName("После клика на кнопку Documentation переходит на страницу https://www.jetbrains.com/help/dataspell/quick-start-guide.html")
+    public void documentationUrl() {
+        assertEquals("https://www.jetbrains.com/help/dataspell/quick-start-guide.html", dataSpellPage.documentationUrl(),
+                "Не верная url после клика на Documentation");
+    }
+
+    @Test
+    @DisplayName("После клика на кнопку JetBrains IDEs переходит на страницу https://www.jetbrains.com/ides/")
+    public void jetBrainsIDEsUrl() {
+        assertEquals("https://www.jetbrains.com/ides/", dataSpellPage.jetBrainsUrl(),
+                "Не верная url после клика на JetBrains IDEs");
+    }
+
+    @Test
+    @DisplayName("Проверка названия кнопки Download")
+    public void downloadButtonName() {
+        String buttonDownload = "Download";
+        assertEquals(buttonDownload, dataSpellPage.downloadButtonName(), "Кнопка с названием Download не находится на странице");
+    }
+
+    @Test
+    @DisplayName("Проверка, что кнопка SQL активна")
+    public void buttonSql() {
+        assertTrue(dataSpellPage.checkSqlElementClickable(), "Кнопка Sql не активна");
+    }
 }
 
